@@ -2,6 +2,26 @@ package main
 
 import "fmt"
 
+type Books struct {
+	title string
+	id int
+}
+
+func showTile(b Books) {
+	fmt.Println("title of this booK: ", b.title);
+}
+
+type Phone interface {
+	call()
+}
+
+type Huawei struct {
+}
+
+func (hw Huawei) call() {
+	fmt.Println("this is a Huawei phone")
+}
+
 func main() {
    fmt.Println("Hello, World!")
 
@@ -16,7 +36,7 @@ func main() {
 
    // array
    fmt.Printf("\narray: \n")
-   var nums1[5] int
+   var nums1 [5]int
    var nums2 = [5]int{0, 1, 2, 3, 4}
    fmt.Println(nums1)
    fmt.Println(nums2)
@@ -47,10 +67,6 @@ func main() {
 
    // struct
    fmt.Printf("\nstruct: \n")
-   type Books struct {
-   		title string
-   		id int
-   }
 
    book1 := Books{"math", 1}
    var book2 Books = Books{"nba", 2}
@@ -64,6 +80,42 @@ func main() {
    var bookIp *Books = &book2
    fmt.Println("ip book title: ", bookIp.title)
 
+   // slice
+   fmt.Printf("\nslice: \n")   
+   slice1 := []int{1, 2, 3}
+   slice2 := make([]int, 5, 10)
+   fmt.Println("slice1: ", slice1)
+   fmt.Println("slice2: ", slice2)
+
+   slice2 = append(slice2, 1, 2, 3)
+   fmt.Println("slice2: ", slice2)
+   fmt.Println("slice2 part: ", slice2[:6])
+
+   // map
+   fmt.Printf("\nmap: \n")
+   cmap := make(map[string]string)
+   cmap["China"] = "Beijing"
+   cmap["US"] = "Washinton"
+   cmap["UK"] = "London"
+
+   for key := range cmap {
+   		fmt.Println("country: ", key, ",capital: ", cmap[key])		
+   }
+
+   delete(cmap, "UK")
+
+   if _,ok := cmap["UK"]; !ok {
+   		fmt.Println("UK is not in the map")
+   }
+
+   if value,ok := cmap["China"]; ok {
+   		fmt.Println("China is in the map, ", value)
+   }
+
+   // interface
+   fmt.Printf("\ninterface: \n")   
+   var hw Phone = new(Huawei)
+   hw.call()
 }
 
 
